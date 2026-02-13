@@ -2,6 +2,8 @@
 
 A Rust MEV relay implementing the Proposer–Builder Separation (PBS) architecture.
 
+**License:** Licensed under either of [Apache License, Version 2.0](LICENSE-APACHE) or [MIT license](LICENSE-MIT) at your option.
+
 ### Disclaimer
 
 **Use at your own risk.** Maintainers do not take responsibility for production use or deployment decisions.
