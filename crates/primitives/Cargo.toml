@@ -1,0 +1,52 @@
+[package]
+name = "relay-primitives"
+version.workspace = true
+edition.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+arbitrary = []
+
+[dependencies]
+mev-share-sse = {  version = "0.1.6" , default-features = false }
+reth = { git = "https://github.com/paradigmxyz/reth.git", branch = "main" }
+# Use system libffi on macOS to avoid bundled libffi aarch64 CFI build failure (Xcode 16+)
+libffi-sys = { version = "2.3", features = ["system"] }
+serde.workspace = true
+serde_with.workspace = true
+serde_derive = "1.0.189"
+futures.workspace = true
+futures-util.workspace = true
+eyre.workspace = true
+tree_hash.workspace = true
+tree_hash_derive.workspace = true
+
+
+blst = "0.3.11"
+ethereum_serde_utils = "0.5"
+alloy-rlp = "0.3"
+thiserror.workspace = true
+warp.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+ssz_types.workspace = true
+
+typenum = "1.17.0"
+
+c-kzg = "0.4.2"
+
+
+alloy-primitives = "0.6"
+
+
+
+ethereum_ssz.workspace = true
+ethereum_ssz_derive.workspace = true
+
+
+
+rand = "0.8.5"
+
+metrics.workspace = true
+reth-metrics = { git = "https://github.com/paradigmxyz/reth.git" }

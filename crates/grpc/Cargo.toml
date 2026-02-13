@@ -1,0 +1,34 @@
+[package]
+name = "relay-grpc-server"
+version.workspace = true
+edition.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tonic = "0.10.2"
+prost = "0.12.1"
+prost-types = "0.12.3"
+
+
+tokio.workspace = true
+url.workspace = true
+relay-storage.workspace = true
+relay-primitives.workspace = true
+tracing-subscriber.workspace = true
+tracing.workspace = true
+thiserror.workspace = true
+tree_hash.workspace = true
+tree_hash_derive.workspace = true
+ssz_types.workspace = true
+
+socket2 = "0.5.6"
+
+
+[build-dependencies]
+tonic-build = "0.10.2"
+prost-build = "0.12.1"
+prost-types = "0.12.3"
+
+[lints]
+workspace = true

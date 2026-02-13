@@ -1,0 +1,71 @@
+name: Continuous Integration
+
+on: [pull_request]
+
+jobs:
+  check:
+    name: Cargo Check
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt install -y protobuf-compiler libprotobuf-dev
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - uses: actions-rs/cargo@v1
+        with:
+          command: check
+  test:
+    name: Cargo Test
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt install -y protobuf-compiler libprotobuf-dev
+      - uses: actions/checkout@v2
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          components: llvm-tools-preview
+          override: true
+      - name: Run tests with coverage
+        run: |
+          cargo install grcov
+          cargo test --all
+          grcov . --llvm --binary-path ./target/debug/ -s . -t lcov --branch --ignore-not-existing --ignore "/*" -o lcov.info
+        env:
+          RUSTFLAGS: "-C instrument-coverage"
+      - name: Coverage summary
+        run: |
+          sudo apt install -y lcov
+          lcov --summary lcov.info
+  fmt:
+    name: fmt
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt install -y protobuf-compiler libprotobuf-dev
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt
+      - name: fmt --check
+        run: cargo fmt --all --check
+  clippy:
+    name: clippy
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt install -y protobuf-compiler libprotobuf-dev
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          components: clippy
+          override: true
+      - uses: Swatinem/rust-cache@v2
+      - name: clippy
+        run: cargo clippy --workspace --tests --all-features
+        env:
+          RUSTFLAGS: "-D warnings"

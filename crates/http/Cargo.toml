@@ -1,0 +1,29 @@
+[package]
+name = "relay-http-server"
+version.workspace = true
+edition.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+warp.workspace = true
+tokio.workspace = true
+serde.workspace = true
+relay-primitives.workspace = true
+relay-storage.workspace = true
+tracing.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+beacon.workspace = true
+eyre.workspace = true
+tree_hash.workspace = true
+ssz_types.workspace = true
+url.workspace = true
+relay-auth.workspace = true
+uuid.workspace = true
+
+metrics.workspace = true
+metrics-exporter-prometheus.workspace = true
+
+[lints]
+workspace = true

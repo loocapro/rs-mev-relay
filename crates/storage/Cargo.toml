@@ -1,0 +1,21 @@
+[package]
+name = "relay-storage"
+version.workspace = true
+edition.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+relay-primitives.workspace = true
+tokio.workspace = true
+serde_json.workspace = true
+futures.workspace = true
+futures-util.workspace = true
+parking_lot.workspace = true
+tracing.workspace = true
+
+
+
+
+[lints]
+workspace = true

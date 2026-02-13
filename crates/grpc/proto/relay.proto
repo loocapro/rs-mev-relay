@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+
+option java_multiple_files = true;
+option java_package = "io.grpc.mev-relay";
+option java_outer_classname = "MevRelay";
+
+package mevrelay;
+
+service MevRelay {
+  rpc SubmitBlock(SubmitBlockRequest) returns (SubmitBlockResponse) {}
+}
+
+// Start SubmitBlock
+message SubmitBlockRequest {
+  BidTrace bidTrace = 1;
+  ExecutionPayload executionPayload = 2;
+  bytes signature = 3;
+  BlobsBundle blobs_bundle = 4;
+}
+
+message SubmitBlockResponse {
+  int64 code = 1;
+  string message = 2;
+}
+
+message BidTrace {
+  uint64 Slot = 1;
+  bytes ParentHash = 2;
+  bytes BlockHash = 3;
+  bytes BuilderPubkey = 4;
+  bytes ProposerPubkey = 5;
+  bytes ProposerFeeRecipient = 6;
+  uint64 GasLimit = 7;
+  uint64 GasUsed = 8;
+  string Value = 9;
+}
+
+message Withdrawal {
+  uint64 Index = 1;
+  uint64 ValidatorIndex = 2;
+  bytes Address = 3;
+  uint64 Amount = 4;
+}
+
+message BlobsBundle {
+  repeated bytes Commitments = 1;
+  repeated bytes Proofs = 2;
+  repeated bytes Blobs = 3;
+}
+
+message ExecutionPayload {
+  bytes ParentHash = 1;
+  bytes StateRoot = 2;
+  bytes ReceiptsRoot = 3;
+  bytes LogsBloom = 4;
+  bytes PrevRandao = 5;
+  bytes ExtraData = 6;
+  bytes BaseFeePerGas = 7;
+  bytes FeeRecipient = 8;
+  bytes BlockHash = 9;
+  repeated compressTx Transactions = 10;
+  repeated Withdrawal Withdrawals = 11;
+  uint64 BlockNumber = 12;
+  uint64 GasLimit = 13;
+  uint64 Timestamp = 14;
+  uint64 GasUsed = 15;
+  uint64 BlobGasUsed = 16;
+  uint64 ExcessBlobGas = 17;
+}
+
+message compressTx {
+  bytes rawData = 1;
+}
+// end SubmitBlock

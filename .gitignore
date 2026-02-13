@@ -1,0 +1,9 @@
+/target
+
+# Secrets and local config — never commit these
+.env
+.env.*
+*.pem
+*.key
+secrets/
+*.secret
